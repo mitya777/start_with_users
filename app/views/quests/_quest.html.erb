@@ -1,0 +1,12 @@
+
+<div class = "inspiration">
+  <%= quest.inspiration %>
+</div>
+
+<div class = "question">
+  <%= quest.question %>
+</div>
+
+<div class = "answers">
+   <%= render :partial => 'answer', :collection => quest.answers, :as => :answer %> 
+</div>

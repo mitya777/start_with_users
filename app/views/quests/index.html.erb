@@ -1,0 +1,10 @@
+
+<h1><%= "#{current_user.name}'s Quests" %></h1>
+
+  <%= will_paginate %>
+  <br />
+  <div class = "quests">
+    <%= render @quests %>
+  </div>
+  <br />
+  <%= will_paginate %>

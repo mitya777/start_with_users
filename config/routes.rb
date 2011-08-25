@@ -1,37 +1,20 @@
 SampleApp::Application.routes.draw do
-  get "videos/show"
-
-  get "videos/new"
-
-  get "videos/create"
-
-  get "videos/destroy"
-
-  get "quests/new"
-
-  get "quests/create"
-
-  get "quests/destroy"
-
-  get "contents/create"
-
-  get "contents/destroy"
 
   resources :users do
-    member do
-      get :following, :followers
-    end
+    resources :quests 
+  end
+
+  resources :quests do
+    resources :answers
   end
 
   get "sessions/new"
 
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :microposts, :only => [:create, :destroy]
-  resources :relationships, :only => [:create, :destroy]
   resources :quests
-  resources :questions
-  resources :contents
+  resources :urls, :only => [:create, :destroy]
+  resources :answers
   
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'sessions#new'

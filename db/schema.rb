@@ -10,57 +10,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110522060631) do
+ActiveRecord::Schema.define(:version => 20110821195738) do
+
+  create_table "answer_relationships", :force => true do |t|
+    t.integer  "quest_id"
+    t.integer  "answer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "answers", :force => true do |t|
-    t.string   "content"
     t.integer  "url_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "quest_id"
-  end
-
-  create_table "inspirations", :force => true do |t|
-    t.string   "content"
-    t.integer  "url_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "quest_id"
-  end
-
-  create_table "microposts", :force => true do |t|
-    t.string   "content"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "questions", :force => true do |t|
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quest_id"
   end
 
   create_table "quests", :force => true do |t|
     t.integer  "user_id"
+    t.string   "inspiration"
+    t.string   "question"
+    t.integer  "url_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "relationships", :force => true do |t|
-    t.integer  "follower_id"
-    t.integer  "followed_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
-  add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
-  add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
   create_table "urls", :force => true do |t|
-    t.string   "url"
+    t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -76,21 +52,5 @@ ActiveRecord::Schema.define(:version => 20110522060631) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-
-  create_table "video_relationships", :force => true do |t|
-    t.integer  "parent_id"
-    t.integer  "child_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "videos", :force => true do |t|
-    t.string   "name"
-    t.string   "url"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-  end
 
 end
