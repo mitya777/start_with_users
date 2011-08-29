@@ -1,5 +1,9 @@
 SampleApp::Application.routes.draw do
 
+
+  match '/quests/current' => 'quests#current', :via => :get
+  match '/quests/current' => 'quests#clear_current', :via => :post
+
   resources :users do
     resources :quests 
   end

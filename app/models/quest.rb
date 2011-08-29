@@ -7,5 +7,6 @@ class Quest < ActiveRecord::Base
   has_many :answers, :through => :answer_relationships
 
   accepts_nested_attributes_for :url
+  accepts_nested_attributes_for :answer_relationships
  
 end

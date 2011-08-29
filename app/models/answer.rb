@@ -5,4 +5,6 @@ class Answer < ActiveRecord::Base
   has_many :answer_relationships
   has_many :quests, :through => :answer_relationships
 
+  accepts_nested_attributes_for :url
+
 end
