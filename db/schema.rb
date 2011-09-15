@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110821195738) do
+ActiveRecord::Schema.define(:version => 20110915172356) do
 
   create_table "answer_relationships", :force => true do |t|
     t.integer  "quest_id"
@@ -21,22 +21,29 @@ ActiveRecord::Schema.define(:version => 20110821195738) do
 
   create_table "answers", :force => true do |t|
     t.integer  "url_id"
-    t.string   "content"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quest_feeds", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "feed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "quests", :force => true do |t|
     t.integer  "user_id"
-    t.string   "inspiration"
-    t.string   "question"
+    t.text     "inspiration"
+    t.text     "question"
     t.integer  "url_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "urls", :force => true do |t|
-    t.string   "address"
+    t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -49,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20110821195738) do
     t.string   "encrypted_password"
     t.string   "salt"
     t.boolean  "admin",              :default => false
+    t.text     "current_quests"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

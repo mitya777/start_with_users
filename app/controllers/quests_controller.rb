@@ -9,8 +9,8 @@ class QuestsController < ApplicationController
 
   def create
     @quest = current_user.quests.build params[:quest]
-    @quest.save!
-    set_current_quest @quest
+    set_current_quest @quest if @quest.save!
+    Rails.logger.debug "CURRENT QUEST(controller): #{cookies[:quest_token] unless cookies[:quest_token].blank?}"
     respond_to do |format|
       format.json {render :json => @quest.to_json}
     end
@@ -26,14 +26,11 @@ class QuestsController < ApplicationController
   end
 
   def current
-    respond_to do |format|
-      format.html do
-        if current_quest? 
-          render :json => current_quest.to_json
-        else
-          render :json => {:quest => nil}
-        end
-      end
+    Rails.logger.debug "CURRENT QUEST(current): #{cookies[:quest_token] unless cookies[:quest_token].blank?}"
+    if current_quest? 
+      render :json => current_quest.to_json
+    else
+      render :json => {:quest => nil}
     end
   end
 

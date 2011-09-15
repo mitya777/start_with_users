@@ -1,8 +1,16 @@
 SampleApp::Application.routes.draw do
 
-
+  #extension api
   match '/quests/current' => 'quests#current', :via => :get
   match '/quests/current' => 'quests#clear_current', :via => :post
+  match '/quests/last' => 'quests#last', :via => :get
+
+  match '/questfeed' => 'quest_feeds#set', :via => :post
+  match '/questfeed' => 'quest_feeds#get', :via => :get
+
+  resources :users do
+    resource :quest_feed
+  end
 
   resources :users do
     resources :quests 

@@ -1,5 +1,5 @@
 
 <div class = "answer">
-  <%= answer.content unless answer.content.nil? %>
-  <%= answer.url %>
+  <strong>A: </strong><%= answer.content unless answer.content.nil? %>
+  <%= render :partial => 'url', :locals => {:url => answer.url} %>
 </div>

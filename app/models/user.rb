@@ -11,11 +11,14 @@
 #
 
 class User < ActiveRecord::Base
+
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
   
   has_many :quests
   has_many :answers, :through => :quests, :source => :answers
+  has_one :quest_feed
+  serialize :current_quests
 
 
   email_regex =/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -29,6 +32,12 @@ class User < ActiveRecord::Base
   validates :password, :presence => true,
                        :confirmation => true,
                        :length       => { :within => 6..40 }
+
+  after_initialize :init_quest_feed
+
+  def init_quest_feed
+    self.quest_feed ||= build_quest_feed :feed => []
+  end
 
   before_save :encrypt_password
 

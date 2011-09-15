@@ -1,12 +1,6 @@
 
-<div class = "inspiration">
-  <%= quest.inspiration %>
-</div>
-
-<div class = "question">
-  <%= quest.question %>
-</div>
-
-<div class = "answers">
-   <%= render :partial => 'answer', :collection => quest.answers, :as => :answer %> 
+<div class = "quest span-22">
+  <%= render :partial => 'inspiration', :locals => {:inspiration => quest.inspiration, :url => quest.url} %>
+  <%= render :partial => 'question', :locals => {:question => quest.question} %> 
+  <%= render :partial => 'answers', :locals => {:answers => quest.answers} %> 
 </div>

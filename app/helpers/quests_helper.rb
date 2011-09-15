@@ -10,8 +10,12 @@ module QuestsHelper
   end
 
   def current_quest
-    Rails.logger.debug "CURRENT QUEST: " + cookies[:quest_token] unless cookies[:quest_token].blank?
-    @current_quest ||= !cookies[:quest_token].blank? ? Quest.find(cookies[:quest_token]) : nil
+    Rails.logger.debug "CURRENT QUEST(helper): #{cookies[:quest_token] unless cookies[:quest_token].blank?}"
+    @current_quest ||= !cookies[:quest_token].blank? ? Quest.find(*cookies[:quest_token]) : nil
+  end
+
+  def quest_token
+    cookies[:quest_token] || [nil, nil]
   end
 
   def current_quest?
